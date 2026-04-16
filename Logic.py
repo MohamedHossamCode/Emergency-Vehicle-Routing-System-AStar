@@ -83,7 +83,7 @@ def get_neighbors(cell): #Returns valid moves
     for dx, dy in directions:
         nx = cell[0] + dx
         ny = cell[1] + dy
-        # Check if the new move within the grid or not
+        #Check if the new move within the grid or not
         if 0 <= nx < grid.GRID_SIZE and 0 <= ny < grid.GRID_SIZE:
             neighbors.append((nx, ny))
     return neighbors
