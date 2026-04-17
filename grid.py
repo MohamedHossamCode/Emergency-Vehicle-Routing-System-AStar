@@ -16,11 +16,13 @@ BONUS_CELLS = [
 INCIDENTS = [(4, 9), (6, 6), (0, 7)]  # The 3 red squares[span_4](end_span)
 
 
-def get_cell_cost(current_cell):
+def get_cell_cost(current_cell,has_bounes):
     if current_cell in BLOCKED_CELLS:
         return float('inf')  # Infinity cost (cannot pass)[span_5](end_span)
 
     if current_cell in BONUS_CELLS:
-        return 0.5
-
+        if has_bounes:
+            return 0.5
+        else:
+            return 1.0
     return 1.0
