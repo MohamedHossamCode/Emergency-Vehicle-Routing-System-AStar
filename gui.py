@@ -100,7 +100,7 @@ def run():
         )
         compare_label.configure(text=text)
     else:
-        sol = Astar(start, INCIDENTS, forced_bonus=hb)
+        sol = Astar(start, INCIDENTS)
         result = sol[goal_index][0]
         if result:
             path, cost, visited, used = result
