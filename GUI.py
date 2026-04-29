@@ -56,7 +56,7 @@ def animate(path, step=0, t=0, trail=None, on_complete=None):
     (x2,y2) = path[step+1][0]
     px, py = x1 + (x2-x1)*t, y1 + (y2-y1)*t
     color = "red" if int(t*10)%2==0 else "white"
-    canvas.create_text(px*CELL + CELL//2, py*CELL + CELL//2, text="🚑", font=("Arial", 20), fill=color)
+    canvas.create_text(px*CELL + CELL//2, py*CELL + CELL//2, text="🚨", font=("Arial", 20), fill=color)
     t += 0.1
     if t >= 1:
         animate(path, step+1, 0, trail + [path[step][0]], on_complete)
