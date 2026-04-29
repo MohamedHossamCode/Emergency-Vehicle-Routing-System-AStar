@@ -46,7 +46,7 @@ def animate(path, step=0, t=0, trail=None, on_complete=None):
     
     if step >= len(path)-1:
         if on_complete:
-            app.after(1000, on_complete) # Wait 1 sec before next animation
+            app.after(300, on_complete) # Wait 1 sec before next animation
         return
 
     draw_grid()
