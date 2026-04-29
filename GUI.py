@@ -17,7 +17,7 @@ app = ctk.CTk()
 app.title("🚑 Ambulance Routing System")
 app.geometry("600x1050")
 
-canvas = tk.Canvas(app, width=550, height=550)
+canvas = tk.Canvas(app, width=CELL*GRID_SIZE, height=CELL*GRID_SIZE)
 canvas.pack(pady=10)
 
 def draw_grid():
