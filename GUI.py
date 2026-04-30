@@ -20,6 +20,8 @@ app.geometry("600x1050")
 canvas = tk.Canvas(app, width=CELL*GRID_SIZE, height=CELL*GRID_SIZE)
 canvas.pack(pady=10)
 
+stop_animation = []
+
 def draw_grid():
     canvas.delete("all")
     for x in range(GRID_SIZE):
@@ -39,12 +41,19 @@ def draw_grid():
                     text=str(INCIDENTS.index((x,y)) + 1),
                     font=("Arial", 13, "bold"), fill="white"
                 )
+def cancel_animations():
+    while stop_animation:
+        try:
+            app.after_cancel(stop_animation.pop())
+        except Exception:
+            pass
 
 def animate(path, step=0, t=0, trail=None, on_complete=None):
     if trail is None: trail = []
     if step >= len(path)-1:
         if on_complete:
-            app.after(300, on_complete) # Wait 1 sec before next animation
+            stop_anim =  app.after(300, on_complete) # Wait 1 sec before next animation
+            stop_animation.append(stop_anim)
         return
     draw_grid()
     for (tx,ty) in trail:
@@ -55,13 +64,14 @@ def animate(path, step=0, t=0, trail=None, on_complete=None):
     (x1,y1) = path[step][0]
     (x2,y2) = path[step+1][0]
     px, py = x1 + (x2-x1)*t, y1 + (y2-y1)*t
-    color = "red" if int(t*10)%2==0 else "white"
+    color = "red" if int(t*10)%24==0 else "blue"
     canvas.create_text(px*CELL + CELL//2, py*CELL + CELL//2, text="🚨", font=("Arial", 20), fill=color)
     t += 0.1
     if t >= 1:
         animate(path, step+1, 0, trail + [path[step][0]], on_complete)
     else:
-        app.after(30, lambda: animate(path, step, t, trail, on_complete))
+       stop_anim= app.after(30, lambda: animate(path, step, t, trail, on_complete))
+       stop_animation.append(stop_anim)
 
 def run():
     goal_index = goal_var.get()
@@ -134,12 +144,14 @@ def compare():
     run()
 
 def reset():
+    cancel_animations()
     draw_grid()
     info.configure(text="")
     for widget in compare_inner.winfo_children():
         widget.destroy()
 
 def kill():
+    cancel_animations()
     app.destroy()
 
 # ── UI ───
