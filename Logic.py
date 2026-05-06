@@ -78,3 +78,4 @@ for goal_index, goal_solutions in enumerate(sol):
     print(f"{str(goal):>10} {str(False):>15} {total_cost_without_bounes:>15} {visited_without_bounes:>20} {path_length_without_bounes:>15}")
     print("-"*80)
     print(f"{'Saved':>10} {'':>15} {abs(total_cost_with_bounes - total_cost_without_bounes):>15} {abs(visited_with_bounes - visited_without_bounes):>20} {abs(path_length_with_bounes - path_length_without_bounes):>15}")
+    print("="*80)
